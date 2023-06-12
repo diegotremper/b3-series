@@ -5,7 +5,7 @@ from b3_api.historical_series_available import DataSeries, historical_series_ava
 from b3_api.historical_series_download import historical_series_download
 
 from b3_series.config import Config
-from b3_series.io import list_series, remove_serie, save_serie
+from b3_series.io import list_series, remove_series, save_series
 
 
 def _find_missing_annual_series(existing_files: list[str]) -> list[DataSeries]:
@@ -85,15 +85,15 @@ def _download_series(series: list[str], timeout_in_minutes: int = 4) -> list[str
     timeout = time() + 60 * timeout_in_minutes
 
     # download the missing series one by one
-    for serie in series:
+    for filename in series:
         current_time = time()
         if current_time > timeout:
             print(f"Timeout of {timeout_in_minutes} minutes reached. Stopping.")
             break
 
-        content = _download_serie_content(serie)
-        save_serie(serie, content)
-        completed.append(serie)
+        content = _download_serie_content(filename)
+        save_series(filename, content)
+        completed.append(filename)
 
     return completed
 
@@ -111,14 +111,18 @@ def _cleanup_duplicated_data():
     )
     month_pattern = re.compile(r"COTAHIST_M\d{2}" + current_year, re.IGNORECASE)
 
-    for file in existing_files:
-        if general_pattern.match(file):
-            if file.upper().startswith("COTAHIST_M") and not month_pattern.match(file):
-                print(f"Removing file {file}...")
-                remove_serie(file)
-            if file.upper().startswith("COTAHIST_D") and not daily_pattern.match(file):
-                print(f"Removing file {file}...")
-                remove_serie(file)
+    for filename in existing_files:
+        if general_pattern.match(filename):
+            if filename.upper().startswith("COTAHIST_M") and not month_pattern.match(
+                filename
+            ):
+                print(f"Removing file {filename}...")
+                remove_series(filename)
+            if filename.upper().startswith("COTAHIST_D") and not daily_pattern.match(
+                filename
+            ):
+                print(f"Removing file {filename}...")
+                remove_series(filename)
 
 
 def series_sync(config=Config()):

@@ -17,7 +17,7 @@ def _parse_date(date: str) -> datetime:
         return None
 
 
-def load_compressed_serie(path: str) -> pd.DataFrame:
+def load_compressed_series(path: str) -> pd.DataFrame:
     names = []
     colspecs = []
     for column in dataframe_columns():

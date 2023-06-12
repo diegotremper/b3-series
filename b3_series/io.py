@@ -4,8 +4,8 @@ from time import perf_counter
 from b3_series.config import Config
 
 
-def get_absolute_series_path(serie: str, config=Config()) -> str:
-    return f"{config.fs_path}/{serie}"
+def get_absolute_series_path(series: str, config=Config()) -> str:
+    return f"{config.fs_path}/{series}"
 
 
 def list_series(config=Config()) -> list[str]:
@@ -16,17 +16,17 @@ def list_series(config=Config()) -> list[str]:
     return existing_files
 
 
-def remove_serie(serie: str, config=Config()):
-    path = get_absolute_series_path(serie, config)
+def remove_series(series: str, config=Config()):
+    path = get_absolute_series_path(series, config)
     Path(path).unlink()
 
 
-def save_serie(serie: str, content: bytes, config=Config()):
-    print(f"Saving serie {serie}...")
+def save_series(series: str, content: bytes, config=Config()):
+    print(f"Saving series {series}...")
     start_time = perf_counter()
 
-    with open(get_absolute_series_path(serie, config), "wb") as f:
+    with open(get_absolute_series_path(series, config), "wb") as f:
         f.write(content)
 
     end_time = perf_counter()
-    print(f"Saved serie {serie}. Time elapsed: {end_time - start_time}")
+    print(f"Saved series {series}. Time elapsed: {end_time - start_time}")
