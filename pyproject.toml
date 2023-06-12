@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "b3-series"
+version = "0.1.2"
+description = ""
+authors = ["Diego"]
+readme = "README.md"
+packages = [{include = "b3_series"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+b3-api = {git = "https://github.com/diegotremper/b3-api.git"}
+pandas = "^2.0.2"
+pydantic = "^1.10.9"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.2"
+pytest-mock = "^3.10.0"
+pytest-cov = "^4.1.0"
+pre-commit = "^3.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
