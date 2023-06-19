@@ -125,7 +125,7 @@ def _cleanup_duplicated_data(config=Config()):
                 remove_series(filename)
 
 
-def series_sync(config=Config()):
+def sync_series(config=Config()):
     existing_files = list_series(config=config)
     missing_series = []
 
