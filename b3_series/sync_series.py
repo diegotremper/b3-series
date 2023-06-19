@@ -98,8 +98,8 @@ def _download_series(series: list[str], timeout_in_minutes: int = 4) -> list[str
     return completed
 
 
-def _cleanup_duplicated_data():
-    existing_files = list_series()
+def _cleanup_duplicated_data(config=Config()):
+    existing_files = list_series(config=config)
     current_year = str(datetime.now().year)
     current_month = str(datetime.now().month).zfill(2)
 
@@ -126,7 +126,7 @@ def _cleanup_duplicated_data():
 
 
 def series_sync(config=Config()):
-    existing_files = list_series(config)
+    existing_files = list_series(config=config)
     missing_series = []
 
     missing_series += _find_missing_annual_series(existing_files)
@@ -143,6 +143,6 @@ def series_sync(config=Config()):
     print(f"Downloaded {len(completed)} series.")
     print(f"Missing {len(missing_series) - len(completed)} series.")
 
-    _cleanup_duplicated_data()
+    _cleanup_duplicated_data(config=config)
 
     return len(missing_series)

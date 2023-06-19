@@ -52,16 +52,14 @@ def _convert_parquets(
 
 
 def sync_parquets(config=Config()):
-    existing_series = list_series(config)
-
-    # filter existing_series to only for zip files
-    zip_series = [serie for serie in existing_series if serie.lower().endswith(".zip")]
+    zip_series = list_series("zip", config=config)
+    parquet_series = list_series("parquet", config=config)
 
     # for each zip file, check if the parquet file exists
     missing_parquets = []
     for zip_serie in zip_series:
         parquet_serie = _replace_zip_name_with_parquet(zip_serie)
-        if parquet_serie not in existing_series:
+        if parquet_serie not in parquet_series:
             missing_parquets.append(zip_serie)
 
     # for each missing parquet file, load the zip file and convert it to parquet

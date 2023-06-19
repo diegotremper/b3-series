@@ -1,3 +1,3 @@
-from b3_series.sync_series import series_sync
+from b3_series.sync_series import sync_series
 
-series_sync()
+sync_series()
