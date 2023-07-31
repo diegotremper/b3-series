@@ -10,7 +10,7 @@ packages = [{include = "b3_series"}]
 python = "^3.10"
 b3-api = {git = "https://github.com/diegotremper/b3-api.git"}
 pandas = "^2.0.2"
-pydantic = "^1.10.9"
+pydantic = "^1.10.12"
 fastparquet = "^2023.4.0"
 
 
