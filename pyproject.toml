@@ -9,7 +9,7 @@ packages = [{include = "b3_series"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 b3-api = {git = "https://github.com/diegotremper/b3-api.git"}
-pandas = "^2.0.2"
+pandas = "^2.1.0"
 pydantic = "^1.10.9"
 fastparquet = "^2023.4.0"
 
